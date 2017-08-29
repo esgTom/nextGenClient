@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  nextGenAPIUrl: 'http://localhost/nextGenAPI/api/code'
 };

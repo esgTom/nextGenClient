@@ -6,3 +6,25 @@
     </select>
   </div>
 </div>
+
+
+<div>
+    <h2>Templates</h2>
+    <div>
+      <select name="" id="" [(ngModel)]="selectedTemplateName">
+        <option *ngFor="let template of templates" [ngValue]="template.TemplateName"> {{ template.TemplateName }} </option>
+      </select>
+    </div>
+  </div>
+
+
+  <div>
+    <h2>Tables</h2>
+    <div>
+      <select name="" id="" [(ngModel)]="selectedTableId">
+        <option *ngFor="let table of tables" [ngValue]="table.TableId"> {{ table.TableName }} </option>
+      </select>
+    </div>
+  </div>
+
+  <button (click)="generateCode()">Generate Code</button>

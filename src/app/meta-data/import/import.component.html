@@ -1,0 +1,11 @@
+<h2>Import Table/Column metadata</h2>
+<div>
+    <span> {{ componentMessages }}</span>
+</div>
+<div>
+    <textarea name="txtMetaData" id="txtMetaData" cols="100" rows="30" placeholder="paste metadata here" [(ngModel)]="columnMetaData"></textarea>
+</div>
+
+<div>
+    <button name="btnImport" id="btnImport" (click)="launchImport()">Launch Import</button>
+</div>

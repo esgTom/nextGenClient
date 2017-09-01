@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { Code } from '../_models/code';
 import { Template } from '../_models/template';
 import { Table } from '../_models/table';
+import { ColumnMetaDataImport } from '../_models/column-meta-data-import';
 
 @Injectable()
 export class NextGenDataService {
@@ -44,5 +45,16 @@ export class NextGenDataService {
         return this.http.get<string>(environment.nextGenAPIGenerateCodeUrl, { params } );
 
     }
+
+    importMetaData( importColumns: ColumnMetaDataImport[]): Observable<string> {
+
+        return this.http.post<string>(environment.nextGenAPIimportColumnMetaDataUrl, importColumns  );
+        // return this.http.post<string>(environment.nextGenAPIimportColumnMetaDataUrl, { importColumns }  )
+        //     .subscribe( response => {},
+        //         error => {}
+        //     );
+
+    }
+
 
 }

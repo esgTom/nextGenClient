@@ -17,8 +17,8 @@ export class GenerationComponent implements OnInit, OnDestroy {
     templates: Template[] = null;
     tables: Table[] = null;
 
-    generatedCode: String = null;
-    selectedTemplateName: String = null;
+    generatedCode: string = null;
+    selectedTemplateName: string = null;
     selectedTableId: Number = null;
 
 
@@ -49,7 +49,7 @@ export class GenerationComponent implements OnInit, OnDestroy {
     generateCode() {
 
         this.dataService.generateCode(this.selectedTemplateName, this.selectedTableId)
-            .subscribe(( data: String) => {
+            .subscribe(( data: string) => {
                 this.generatedCode = data;
         });
 

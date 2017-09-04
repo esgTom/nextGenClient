@@ -8,8 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GenerationComponent } from './generation/generation.component';
 import { NextGenDataService } from './services/next-gen-data.service';
-import { MetaDataRoutingModule } from './meta-data/meta-data-routing.module';
-import { MetaDataModule } from './meta-data/meta-data.module';
 
 @NgModule({
   declarations: [
@@ -20,8 +18,7 @@ import { MetaDataModule } from './meta-data/meta-data.module';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule,
-    MetaDataModule
+    FormsModule
   ],
   providers: [NextGenDataService],
   bootstrap: [AppComponent]

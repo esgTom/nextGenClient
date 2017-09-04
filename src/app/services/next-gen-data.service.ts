@@ -7,6 +7,7 @@ import { Code } from '../_models/code';
 import { Template } from '../_models/template';
 import { Table } from '../_models/table';
 import { ColumnMetaDataImport } from '../_models/column-meta-data-import';
+import { GeneratedCode } from '../_models/generated-code';
 
 @Injectable()
 export class NextGenDataService {
@@ -36,13 +37,13 @@ export class NextGenDataService {
 
     }
 
-    generateCode( selectedTemplateName: string, selectedTableId: Number): Observable<string> {
+    generateCode( selectedTemplateName: string, selectedTableId: Number): Observable<GeneratedCode> {
 
         const params = new HttpParams()
             .set('selectedTemplateName', selectedTemplateName)
             .set('selectedTableId', selectedTableId.toString());
 
-        return this.http.get<string>(environment.nextGenAPIGenerateCodeUrl, { params } );
+        return this.http.get<GeneratedCode>(environment.nextGenAPIGenerateCodeUrl, { params } );
 
     }
 

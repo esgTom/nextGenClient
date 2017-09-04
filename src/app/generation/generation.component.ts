@@ -5,6 +5,7 @@ import { Code } from '../_models/code';
 import { Template } from '../_models/template';
 import { NextGenDataService } from '../services/next-gen-data.service';
 import { Table } from '../_models/table';
+import { GeneratedCode } from '../_models/generated-code';
 
 @Component({
   selector: 'next-gen-generation',
@@ -49,8 +50,8 @@ export class GenerationComponent implements OnInit, OnDestroy {
     generateCode() {
 
         this.dataService.generateCode(this.selectedTemplateName, this.selectedTableId)
-            .subscribe(( data: string) => {
-                this.generatedCode = data;
+            .subscribe(( data: GeneratedCode) => {
+                this.generatedCode = data.Code;
         });
 
     }

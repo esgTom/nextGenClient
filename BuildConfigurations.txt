@@ -1,0 +1,93 @@
+ng build --dev  -d "/nextgen"
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NextGen</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <next-gen-root></next-gen-root>
+<script type="text/javascript" src="/nextgen/inline.bundle.js"></script><script type="text/javascript" src="/nextgen/polyfills.bundle.js"></script><script type="text/javascript" src="/nextgen/styles.bundle.js"></script><script type="text/javascript" src="/nextgen/vendor.bundle.js"></script><script type="text/javascript" src="/nextgen/main.bundle.js"></script></body>
+</html>
+
+
+****************************
+ng build --dev
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NextGen</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <next-gen-root></next-gen-root>
+<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
+</html>
+
+
+****************************
+ng build --dev -bh "./" <-- DOES WORK  - but not able to load metadata routes
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NextGen</title>
+  <base href="./">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <next-gen-root></next-gen-root>
+<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
+</html>
+
+****************************
+ng build --dev  -d "/nextgen" -bh "/nextgen" <-- DOES NOT WORK
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NextGen</title>
+  <base href="/nextgen">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <next-gen-root></next-gen-root>
+<script type="text/javascript" src="/nextgen/inline.bundle.js"></script><script type="text/javascript" src="/nextgen/polyfills.bundle.js"></script><script type="text/javascript" src="/nextgen/styles.bundle.js"></script><script type="text/javascript" src="/nextgen/vendor.bundle.js"></script><script type="text/javascript" src="/nextgen/main.bundle.js"></script></body>
+</html>
+
+
+
+****************************
+ng build --dev -bh "/nextgen" <-- DOES NOT WORK
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NextGen</title>
+  <base href="/nextgen">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <next-gen-root></next-gen-root>
+<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
+</html>

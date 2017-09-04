@@ -12,7 +12,7 @@
     <h2>Templates</h2>
     <div>
       <select name="" id="" [(ngModel)]="selectedTemplateName">
-        <option *ngFor="let template of templates" [ngValue]="template.TemplateName"> {{ template.TemplateName }} </option>
+        <option *ngFor="let template of templates" [ngValue]="template.TemplateNameCategory"> {{ template.TemplateNameCategory }} </option>
       </select>
     </div>
   </div>
@@ -29,5 +29,9 @@
 
   <div>
     <button (click)="generateCode()">Generate Code</button>
+  </div>
+
+  <div>
+      <textarea name="txtGeneratedCode" id="txtGeneratedCode" cols="30" rows="10" [(ngModel)]="generatedCode"></textarea>
   </div>
   

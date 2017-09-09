@@ -3,9 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ImportComponent } from './import/import.component';
 import { UpdateComponent } from './update/update.component';
+import { MetaDataComponent } from './meta-data.component';
 
 const routes: Routes = [
-    { path: '', component: ImportComponent},
+    { path: '', component: MetaDataComponent},
+    { path: 'import', component: ImportComponent},
     { path: 'update', component: UpdateComponent},
 ];
 

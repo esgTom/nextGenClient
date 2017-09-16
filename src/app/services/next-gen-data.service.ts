@@ -8,6 +8,7 @@ import { Template } from '../_models/template';
 import { Table } from '../_models/table';
 import { ColumnMetaDataImport } from '../_models/column-meta-data-import';
 import { GeneratedCode } from '../_models/generated-code';
+import { Project } from '../_models/project';
 
 @Injectable()
 export class NextGenDataService {
@@ -16,12 +17,26 @@ export class NextGenDataService {
     // templates: Observable<Template[]>;
     // templates: Template[];
 
+    projectId: number;
+
     constructor( private http: HttpClient) { }
 
     getCodes() {
         return this.http
         .get<Code[]>(environment.nextGenAPICodeUrl);
     }
+
+    getProjects() {
+        return this.http
+        .get<Project[]>(environment.nextGenAPIProjectUrl);
+    }
+
+    insertProject(project: Project) {
+        return this.http
+        .post<Project>(environment.nextGenAPIProjectUrl, project);
+    }
+
+
 
     getTemplates(): Observable<Template[]> {
 
@@ -50,10 +65,7 @@ export class NextGenDataService {
     importMetaData( importColumns: ColumnMetaDataImport[]): Observable<string> {
 
         return this.http.post<string>(environment.nextGenAPIimportColumnMetaDataUrl, importColumns  );
-        // return this.http.post<string>(environment.nextGenAPIimportColumnMetaDataUrl, { importColumns }  )
-        //     .subscribe( response => {},
-        //         error => {}
-        //     );
+
 
     }
 

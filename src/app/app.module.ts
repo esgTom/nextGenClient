@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { GenerationComponent } from './generation/generation.component';
 import { NextGenDataService } from './services/next-gen-data.service';
 import { HomeComponent } from './home/home.component';
+import { ErrorService } from './_core/error-service.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     NgbModule.forRoot()
   ],
-  providers: [NextGenDataService],
+  providers: [NextGenDataService, ErrorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
-import { environment } from '../../environments/environment';
-import { Project } from '../_models/project';
-import { NextGenDataService } from '../services/next-gen-data.service';
-import { ErrorService } from '../_core/error-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
+
+import { ErrorService } from '../_core/error-service.service';
+import { ProjectBOService } from '../_business-objects/project-bo.service';
+
 
 @Component({
   selector: 'next-gen-home',
@@ -13,48 +13,32 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
 
-    projects: Project[] = new Array<Project>();
-    project: Project;
-
-    set selectedProjectId(projectId: number){
-        this.nextGenDataService.projectId = projectId;
-    }
-    get selectedProjectId(){
-        return this.nextGenDataService.projectId;
-    }
-
-
-    constructor(private nextGenDataService: NextGenDataService,
+    constructor(
+        private _route: ActivatedRoute,
+        private _router: Router,
+        private _businessObject: ProjectBOService,
         private errorService: ErrorService) { }
+
+    // Properties
+    get businessObject() {
+        return this._businessObject;
+    }
 
     ngOnInit() {
 
-        this.project = new Project(0, '', '');
+        // if ( this._businessObject.selectedProject !== null ) {
+        //     const projectId = this._route.queryParams.subscribe( params => {
+        //         this._businessObject.selectedProject.ProjectId = params['id'];
+        //     });
+        //     if ( projectId ) {
+        //         this._businessObject.selectedProject.ProjectId = +projectId;
+        //     }
 
-        this.nextGenDataService.getProjects()
-            .subscribe( data => {
-                this.projects = data;
-            },
-            (error: HttpErrorResponse) => {
-                this.errorService.ErrorMessage = error.message ;
-            }
-        );
+        // }
     }
 
-    addProject() {
-
-        this.project.CreatedBy = environment.userName;
-        this.project.ModifiedBy = environment.userName;
-
-        this.nextGenDataService.insertProject(this.project)
-        .subscribe( data => {
-            this.projects.push(data);
-        },
-        (error: HttpErrorResponse) => {
-            this.errorService.ErrorMessage = error.message ;
-        }
-    );
-
+    updateProjectUrl() {
+        this._router.navigate(['home'], { queryParams: { id: this.businessObject.selectedProject.ProjectId }});
     }
 
 }

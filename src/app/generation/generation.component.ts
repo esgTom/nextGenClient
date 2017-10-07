@@ -6,6 +6,8 @@ import { Template } from '../_models/template';
 import { NextGenDataService } from '../services/next-gen-data.service';
 import { Table } from '../_models/table';
 import { GeneratedCode } from '../_models/generated-code';
+import { ProjectBOService } from '../_business-objects/project-bo.service';
+import { ErrorService } from '../_core/error-service.service';
 
 @Component({
   selector: 'next-gen-generation',
@@ -14,22 +16,40 @@ import { GeneratedCode } from '../_models/generated-code';
 })
 export class GenerationComponent implements OnInit, OnDestroy {
 
+    constructor(
+        private _route: ActivatedRoute,
+        private router: Router,
+        private dataService: NextGenDataService,
+        private _businessObject: ProjectBOService,
+        private errorService: ErrorService ) { }
+
+    // Properties
+    get businessObject() {
+        return this._businessObject;
+    }
+
     codes: Code[] = null;
     templates: Template[] = null;
     tables: Table[] = null;
 
     generatedCode: string = null;
-    selectedTemplateName: string = null;
+    selectedTemplate: Template = null;
     selectedTableId: Number = null;
 
 
-  constructor( private route: ActivatedRoute,
-        private router: Router,
-      private dataService: NextGenDataService) { }
-
   ngOnInit() {
 
-        this.route.data
+    if ( this._businessObject.selectedProject !== null ) {
+        const projectId = this._route.queryParams.subscribe( params => {
+            this._businessObject.selectedProject.ProjectId = params['id'];
+        });
+        if ( projectId ) {
+            this._businessObject.selectedProject.ProjectId = +projectId;
+        }
+
+    }
+
+        this._route.data
             .subscribe((data: { codes: Code[] }) => {
                 this.codes = data.codes;
         });
@@ -48,8 +68,8 @@ export class GenerationComponent implements OnInit, OnDestroy {
 
 
     generateCode() {
-
-        this.dataService.generateCode(this.selectedTemplateName, this.selectedTableId)
+        const selectedTemplate =  `${this.selectedTemplate.TemplateCategory}-${this.selectedTemplate.TemplateName}`;
+        this.dataService.generateCode(selectedTemplate, this.selectedTableId)
             .subscribe(( data: GeneratedCode) => {
                 this.generatedCode = data.Code;
         });

@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/ToPromise';
 import { NextGenDataService } from './next-gen-data.service';
 import { Code } from '../_models/code';
+import { Project } from '../_models/project';
+import { ProjectBOService } from '../_business-objects/project-bo.service';
 
 @Injectable()
 export class NextGenRouteCanActivateGuard implements CanActivate {
@@ -36,4 +38,18 @@ export class NextGenRouteResolveGuard implements Resolve<Code[]> {
           return null;
         });
   }
+}
+
+@Injectable()
+export class NextGenProjectsResolveGuard implements Resolve<Observable<Project[]>> {
+
+  constructor( private policyBO: ProjectBOService ) {}
+
+  resolve(next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<Project[]> {
+
+        const projectId = +next.queryParamMap.get('id') || 0;
+        return this.policyBO.loadProjects(projectId);
+
+    }
 }

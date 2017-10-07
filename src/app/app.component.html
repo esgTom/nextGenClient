@@ -8,13 +8,13 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" [routerLink]="'home'">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" [routerLink]="'home'" queryParamsHandling="merge">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="'codes'">Generate <span class="sr-only">(current)</span></a>
+              <a class="nav-link" [routerLink]="'codes'" queryParamsHandling="merge">Generate <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="'metadata'">Metadata <span class="sr-only">(current)</span></a>
+              <a class="nav-link" [routerLink]="'metadata'" queryParamsHandling="merge">Metadata <span class="sr-only">(current)</span></a>
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">

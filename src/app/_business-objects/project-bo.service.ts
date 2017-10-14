@@ -64,22 +64,6 @@ export class ProjectBOService {
 
     }
 
-    addProject() {
-        this._errorService.ErrorMessage = '';
-        this._model.CreatedBy = environment.userName;
-        this._model.ModifiedBy = environment.userName;
-
-        this._dataService.insertProject(this._model)
-        .subscribe( data => {
-            this._projects.push(data);
-            this._projectId = data.ProjectId;
-            this.setSelectedProject(this._projectId);
-        },
-        (error: HttpErrorResponse) => {
-            this._errorService.ErrorMessage = error.message ;
-        });
-    }
-
     setSelectedProject(projectId: number) {
         const matched = this._projects.filter( project => {
             return project.ProjectId === projectId;
@@ -91,6 +75,36 @@ export class ProjectBOService {
         } else if (this._projects !== null && this._projects.length > 0) { // set to 1st project
             this._model = this._projects[0];
         }
+    }
+
+    saveChanges(project: Project): Observable<string> {
+
+        this._errorService.ErrorMessage = '';
+        const saveMode: string = project.ProjectId === 0 ? 'add' : 'edit';
+        project.CreatedBy = environment.userName;
+        project.ModifiedBy = environment.userName;
+
+        this._dataService.saveProjectChanges(project)
+            .subscribe( data => {
+
+                if (saveMode === 'add') { // Adding new project, so push into the Projects list
+                    this._projects.push(data);
+                    this._projectId = data.ProjectId;
+                    this.setSelectedProject(this._projectId);
+
+                } else { // Updating, so push changes to current object
+                    this.selectedProject.ProjectName = project.ProjectName;
+                    this.selectedProject.ProjectDescription = project.ProjectDescription;
+                }
+                // return Observable.of(this._errorService.ErrorMessage);
+
+            },
+            (error: HttpErrorResponse) => {
+                this._errorService.ErrorMessage = error.message ;
+                // return Observable.of(this._errorService.ErrorMessage);
+            });
+
+        return Observable.of(this._errorService.ErrorMessage);
     }
 
 }

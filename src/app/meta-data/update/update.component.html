@@ -1,13 +1,16 @@
 <div class="row mt-4">
     <div class="col-md-4 border-right-1">
         <h4>Select a Table to Edit</h4>
-        <select class="" id="TableName">
-            <option>-- Select Table --</option>
-            <option>Workout</option>
-            <option>Nutrition</option>
-            <option>Schedule</option>
-        </select>
-        <a href="#"><i class="fa fa-plus-circle mr-1" aria-hidden="true"></i>Add New</a>
+        
+        <div>
+            <h2>Tables</h2>
+            <div>
+                <select name="" id="" [(ngModel)]="selectedTableId">
+                <option *ngFor="let table of tables" [ngValue]="table.TableId"> {{ table.TableName }} </option>
+                </select>
+            </div>
+        </div>
+
         <div>
             <h5>Columns</h5>
             <ul>

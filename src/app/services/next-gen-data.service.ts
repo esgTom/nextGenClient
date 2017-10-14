@@ -34,18 +34,11 @@ export class NextGenDataService {
             .get<Project[]>(environment.nextGenAPIProjectUrl);
     }
 
-    insertProject(project: Project) {
-
-        // TODO:
-        // Move Project to BO
-        // Post-IO processing
-        // Error handling
+    saveProjectChanges(project: Project) {
 
         return this.http
             .post<Project>(environment.nextGenAPIProjectUrl, project);
     }
-
-
 
     getTemplates(): Observable<Template[]> {
 
@@ -54,10 +47,13 @@ export class NextGenDataService {
 
     }
 
-    getTables(): Observable<Table[]> {
+    getTables(projectId: number): Observable<Table[]> {
+
+        let params = new HttpParams();
+        params = params.set('projectId', projectId.toString());
 
         // get returns an observable, which we simple pass back to the caller
-        return this.http.get<Table[]>(environment.nextGenAPITableUrl);
+        return this.http.get<Table[]>(environment.nextGenAPITableUrl, { params: params });
 
     }
 

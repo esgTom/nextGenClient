@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Resolve } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Resolve, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/ToPromise';
+
 import { NextGenDataService } from './next-gen-data.service';
 import { Code } from '../_models/code';
 import { Project } from '../_models/project';
@@ -43,13 +44,15 @@ export class NextGenRouteResolveGuard implements Resolve<Code[]> {
 @Injectable()
 export class NextGenProjectsResolveGuard implements Resolve<Observable<Project[]>> {
 
-  constructor( private policyBO: ProjectBOService ) {}
+  constructor(
+    private _router: Router,
+    private _policyBO: ProjectBOService ) {}
 
   resolve(next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<Project[]> {
 
         const projectId = +next.queryParamMap.get('id') || 0;
-        return this.policyBO.loadProjects(projectId);
+        return this._policyBO.loadProjects(projectId);
 
     }
 }

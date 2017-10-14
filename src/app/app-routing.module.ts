@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent, resolve: { routeData: NextGenProjectsResolveGuard} },
-    { path: 'codes', component: GenerationComponent, resolve: { codes: NextGenRouteResolveGuard} },
+    { path: 'generate', component: GenerationComponent, resolve: { routeData: NextGenProjectsResolveGuard}  },
     { path: 'metadata', loadChildren: 'app/meta-data/meta-data.module#MetaDataModule', resolve: { routeData: NextGenProjectsResolveGuard} },
     { path: '', redirectTo: '/home', pathMatch: 'full'},
     { path: '**', redirectTo: '/home'}

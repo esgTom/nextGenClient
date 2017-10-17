@@ -6,8 +6,12 @@
 export const environment = {
   production: false,
   nextGenAPICodeUrl: 'http://localhost/nextGenAPI/api/code',
+  nextGenAPIProjectUrl: 'http://localhost/nextGenAPI/api/project',
   nextGenAPITemplateUrl: 'http://localhost/nextGenAPI/api/template',
   nextGenAPITableUrl: 'http://localhost/nextGenAPI/api/tabledefinition',
   nextGenAPIGenerateCodeUrl: 'http://localhost/nextGenAPI/api/generatecode',
   nextGenAPIimportColumnMetaDataUrl: 'http://localhost/nextGenAPI/api/import/importcolumnmetadata',
+
+  userName: 'NxtGenUser'
+
 };

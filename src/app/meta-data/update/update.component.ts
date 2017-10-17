@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Table } from '../../_models/table';
 import { Column } from '../../_models/column';
+import { NextGenDataService } from '../../services/next-gen-data.service';
+import { ProjectBOService } from '../../_business-objects/project-bo.service';
+import { ErrorService } from '../../_core/error-service.service';
 
 @Component({
   selector: 'next-gen-update',
@@ -16,14 +19,20 @@ export class UpdateComponent implements OnInit {
     selectedColumn: Column = null;
     updateColumn: Column = null;
 
-  constructor() {
+    selectedTableId: Number = null;
 
-    // Fetch tables and it's columns in resolver
-    // load lists here
-
+  constructor(
+    private _dataService: NextGenDataService,
+    private _businessObject: ProjectBOService,
+    private _errorService: ErrorService ) {
   }
 
   ngOnInit() {
+
+    this._dataService.getTables(this._businessObject.selectedProject.ProjectId)
+    .subscribe(( data: Table[]) => {
+        this.tables = data;
+    });
   }
 
   onAddNewTable() {
